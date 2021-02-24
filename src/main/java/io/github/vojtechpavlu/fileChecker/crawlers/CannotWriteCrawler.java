@@ -4,6 +4,8 @@ package io.github.vojtechpavlu.fileChecker.crawlers;
 import io.github.vojtechpavlu.fileChecker.containers.NOTContainer;
 import io.github.vojtechpavlu.fileChecker.core.CanWriteCheck;
 
+import java.io.File;
+
 
 /**
  * <i>AUTHOR OF THIS PROJECT IS NOT RESPONSIBLE FOR ANY DAMAGE TO
@@ -19,7 +21,12 @@ import io.github.vojtechpavlu.fileChecker.core.CanWriteCheck;
  * and implementation of the instances belonging to this class.</p>
  *
  * <p>This class prepares a {@link RestrictedSearch} instance and
- * fills it with the instance of {@link CanWriteCheck}.</p>
+ * fills it with the instance of {@link CanWriteCheck} sealed in the
+ * {@link NOTContainer}.</p>
+ *
+ * <p>This crawler filters out all the files the program can write to;
+ * only the files you cannot write to are gonna be in the result of the
+ * {@link RestrictedSearch#crawl(File)} method.</p>
  *
  * @author Vojtech Pavlu
  * @version 2021-02-24

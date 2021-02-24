@@ -49,7 +49,7 @@ public class RestrictedSearch implements Crawler {
 
     /** The set of restrictions each file has to pass. When it does not,
      * it's filtered out. */
-    private final List<FileCheck> restrictions = new ArrayList<>();
+    protected final List<FileCheck> restrictions = new ArrayList<>();
 
 
     /* =========================================================== */
