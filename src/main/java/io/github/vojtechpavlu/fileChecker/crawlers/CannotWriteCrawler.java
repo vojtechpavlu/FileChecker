@@ -1,7 +1,8 @@
-package io.github.vojtechpavlu.fileChecker.utils;
+package io.github.vojtechpavlu.fileChecker.crawlers;
 
 
-import io.github.vojtechpavlu.fileChecker.core.IsDirectoryCheck;
+import io.github.vojtechpavlu.fileChecker.containers.NOTContainer;
+import io.github.vojtechpavlu.fileChecker.core.CanWriteCheck;
 
 
 /**
@@ -14,31 +15,32 @@ import io.github.vojtechpavlu.fileChecker.core.IsDirectoryCheck;
  * PROJECT WAS CREATED JUST FOR FUN.</i>
  *
  *
- * <p>Class of {@link FoldersOnlyCrawler} is an abstract representation
+ * <p>Class of {@link CannotWriteCrawler} is an abstract representation
  * and implementation of the instances belonging to this class.</p>
  *
- * <p>This class is just an small extension of {@link RestrictedSearch}
- * based on setting the parameter of the parent the {@link IsDirectoryCheck}.</p>
+ * <p>This class prepares a {@link RestrictedSearch} instance and
+ * fills it with the instance of {@link CanWriteCheck}.</p>
  *
  * @author Vojtech Pavlu
  * @version 2021-02-24
  *
- * @see RestrictedSearch
  * @see FilesOnlyCrawler
+ * @see FoldersOnlyCrawler
+ * @see RestrictedSearch
  */
-public class FoldersOnlyCrawler extends RestrictedSearch {
-
+public class CannotWriteCrawler extends RestrictedSearch {
 
 
     /* =========================================================== */
     /* ====== CONSTRUCTORS ======================================= */
 
+
     /**
      * <p>This constructor is defining a {@link RestrictedSearch} instance
-     * by setting the only restriction as the {@link IsDirectoryCheck} instance.</p>
+     * by setting the only restriction as the {@link CanWriteCheck} instance.</p>
      */
-    public FoldersOnlyCrawler() {
+    public CannotWriteCrawler() {
 
-        super(new IsDirectoryCheck());
+        super(new NOTContainer(new CanWriteCheck()));
     }
 }

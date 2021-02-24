@@ -1,7 +1,7 @@
-package io.github.vojtechpavlu.fileChecker.utils;
+package io.github.vojtechpavlu.fileChecker.crawlers;
 
 
-import io.github.vojtechpavlu.fileChecker.core.IsFileCheck;
+import io.github.vojtechpavlu.fileChecker.core.IsDirectoryCheck;
 
 
 /**
@@ -14,31 +14,29 @@ import io.github.vojtechpavlu.fileChecker.core.IsFileCheck;
  * PROJECT WAS CREATED JUST FOR FUN.</i>
  *
  *
- * <p>Class of {@link FilesOnlyCrawler} is an abstract representation
+ * <p>Class of {@link FoldersOnlyCrawler} is an abstract representation
  * and implementation of the instances belonging to this class.</p>
  *
  * <p>This class is just an small extension of {@link RestrictedSearch}
- * based on setting the parameter of the parent the {@link IsFileCheck}.</p>
+ * based on setting the parameter of the parent the {@link IsDirectoryCheck}.</p>
  *
  * @author Vojtech Pavlu
  * @version 2021-02-24
  *
  * @see RestrictedSearch
- * @see FoldersOnlyCrawler
+ * @see FilesOnlyCrawler
  */
-public class FilesOnlyCrawler extends RestrictedSearch {
-
-
+public class FoldersOnlyCrawler extends RestrictedSearch {
 
     /* =========================================================== */
     /* ====== CONSTRUCTORS ======================================= */
 
     /**
      * <p>This constructor is defining a {@link RestrictedSearch} instance
-     * by setting the only restriction as the {@link IsFileCheck} instance.</p>
+     * by setting the only restriction as the {@link IsDirectoryCheck} instance.</p>
      */
-    public FilesOnlyCrawler() {
+    public FoldersOnlyCrawler() {
 
-        super(new IsFileCheck());
+        super(new IsDirectoryCheck());
     }
 }

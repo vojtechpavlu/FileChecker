@@ -1,4 +1,4 @@
-package io.github.vojtechpavlu.fileChecker.utils;
+package io.github.vojtechpavlu.fileChecker.crawlers;
 
 
 import java.io.File;
