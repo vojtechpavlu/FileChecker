@@ -20,10 +20,21 @@ import java.io.IOException;
  * <p>Class of {@link NOTContainer} is an abstract representation
  * and implementation of the instances belonging to this class.</p>
  *
- * <p></p>
+ * <p>This {@link UnaryFileCheckContainer} is responsible for
+ * inverting (negation) the answer of the given checker.</p>
+ *
+ * <p>Example usage is when you want to filter files which does not
+ * have some attribute. For example with combination of
+ * {@link io.github.vojtechpavlu.fileChecker.core.CanWriteCheck},
+ * you know which file you can't write to.</p>
  *
  * @author Vojtech Pavlu
  * @version 2021-02-21
+ *
+ * @see UnaryFileCheckContainer
+ * @see MultipleFileCheckContainer
+ * @see ANDContainer
+ * @see ORContainer
  */
 public class NOTContainer implements UnaryFileCheckContainer {
 
