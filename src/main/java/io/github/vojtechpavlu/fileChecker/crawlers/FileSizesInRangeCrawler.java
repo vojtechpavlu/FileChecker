@@ -27,6 +27,9 @@ import java.io.File;
  * <p>The functionality is provided by {@link RestrictedSearch#crawl(File)},
  * passing the {@link MinFileSizeCheck} and {@link MaxFileSizeCheck} instances.</p>
  *
+ * <p>This may be used for filtering a set of files with specific range of size.
+ * For example movies in ".avi" formats usually have in between 600 MB and 1.7 GB.</p>
+ *
  * @author Vojtech Pavlu
  * @version 2021-02-24
  *
