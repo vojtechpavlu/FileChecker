@@ -52,7 +52,7 @@ public class ANDContainer implements MultipleFileCheckContainer {
     /**
      * <p>This non-parametric constructor only creates the empty instance.</p>
      */
-    public ANDContainer() {}
+    private ANDContainer() {}
 
 
     /**

@@ -20,23 +20,84 @@ import java.util.List;
  * PROJECT WAS CREATED JUST FOR FUN.</i>
  *
  *
- * <p>Class of {@link ORContainer} is an abstract representation
+ * <p>Class of {@link XORContainer} is an abstract representation
  * and implementation of the instances belonging to this class.</p>
  *
- * <p></p>
+ * <p>XOR based file check container provides ability to test if
+ * the given file checks' answers differs for the given file.
+ * The base is the XOR boolean function for variable number of
+ * inputs.</p>
+ *
+ * <table>
+ *     <th>
+ *         <td>A</td>
+ *         <td>B</td>
+ *         <td>...</td>
+ *         <td>N</td>
+ *         <td>R</td>
+ *     </th>
+ *     <tr>
+ *         <td>0</td>
+ *         <td>0</td>
+ *         <td>...</td>
+ *         <td>0</td>
+ *         <td>0</td>
+ *     </tr>
+ *     <tr>
+ *         <td>1</td>
+ *         <td>0</td>
+ *         <td>...</td>
+ *         <td>0</td>
+ *         <td>1</td>
+ *     </tr>
+ *     <tr>
+ *         <td>1</td>
+ *         <td>1</td>
+ *         <td>...</td>
+ *         <td>0</td>
+ *         <td>1</td>
+ *     </tr>
+ *     <tr>
+ *         <td>...</td>
+ *         <td>...</td>
+ *         <td>...</td>
+ *         <td>...</td>
+ *         <td>1</td>
+ *     </tr>
+ *     <tr>
+ *         <td>1</td>
+ *         <td>1</td>
+ *         <td>...</td>
+ *         <td>1</td>
+ *         <td>0</td>
+ *     </tr>
+ * </table>
+ *
+ * <p>This is the schema of the multiple input XOR used in this class. The base functionality
+ * is provided using checking if any of the file checks returns different value than the
+ * first one. This means there is a need for at least two of them.</p>
  *
  * @author Vojtech Pavlu
- * @version 2021-02-21
+ * @version 2021-02-25
  */
-public class ORContainer implements MultipleFileCheckContainer {
+public class XORContainer implements MultipleFileCheckContainer {
 
     /* =========================================================== */
     /* ====== INSTANCE VARIABLES ================================= */
 
-    /** The {@link List} of all the checks used to determine if the
-     * given file corresponds the needs. The list is represented
-     * by the {@link ArrayList} collection. */
+    /** List of all the checks used for testing the files. */
     private List<FileCheck> checks = new ArrayList<>();
+
+
+    /* =========================================================== */
+    /* ====== STATIC VARIABLES =================================== */
+
+    private static final byte NUMBER_OF_NEEDED_VALUES = 2;
+    private static final String ERROR_MESSAGE =
+            String.format("There is not enough of file checks to provide XOR operation! " +
+                          "There has to be at least %d of them",
+                          NUMBER_OF_NEEDED_VALUES
+            );
 
 
     /* =========================================================== */
@@ -46,7 +107,7 @@ public class ORContainer implements MultipleFileCheckContainer {
     /**
      * <p>This non-parametric constructor only creates the empty instance.</p>
      */
-    private ORContainer() {}
+    private XORContainer() {}
 
 
     /**
@@ -55,7 +116,7 @@ public class ORContainer implements MultipleFileCheckContainer {
      *
      * @param fileChecks    to be added to the container.
      */
-    public ORContainer(FileCheck... fileChecks) {
+    public XORContainer(FileCheck... fileChecks) {
 
         this.checks.addAll(Arrays.asList(fileChecks));
     }
@@ -67,7 +128,7 @@ public class ORContainer implements MultipleFileCheckContainer {
      *
      * @param fileCheck to be added to the list of checks.
      */
-    public ORContainer(FileCheck fileCheck) {
+    public XORContainer(FileCheck fileCheck) {
 
         this.checks.add(fileCheck);
     }
@@ -80,7 +141,7 @@ public class ORContainer implements MultipleFileCheckContainer {
      *
      * @param fileChecks    {@link List} of checks to be added to the container.
      */
-    public ORContainer(List<FileCheck> fileChecks) {
+    public XORContainer(List<FileCheck> fileChecks) {
 
         this.checks.addAll(fileChecks);
     }
@@ -108,9 +169,8 @@ public class ORContainer implements MultipleFileCheckContainer {
      *
      * @param file Path to the {@link File} to be checked.
      *
-     * @return {@code true} when the given file passes all
-     * the subtests defined by this class. Otherwise
-     * it returns {@code false}
+     * @return {@code true} when there is an at least one difference between all the
+     *          file checks.
      *
      * @throws IOException When some error occurs. Usually it's because the
      *                     file does not exist or is not reachable.
@@ -118,14 +178,23 @@ public class ORContainer implements MultipleFileCheckContainer {
     @Override
     public boolean check(File file) throws IOException {
 
-        for (FileCheck fc : this.checks) {
+        if(this.checks.size() > 1) {
 
-            if(fc.check(file)) {
+            boolean first = this.checks.get(0).check(file);
 
-                return true;
+            for (int i = 1; i < this.checks.size(); i++) {
+
+                if (this.checks.get(i).check(file) != first) {
+
+                    return true;
+                }
             }
-        }
 
-        return false;
+            return false;
+
+        } else {
+
+            throw new RuntimeException(ERROR_MESSAGE);
+        }
     }
 }
