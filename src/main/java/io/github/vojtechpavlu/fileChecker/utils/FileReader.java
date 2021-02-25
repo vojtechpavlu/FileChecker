@@ -1,11 +1,10 @@
 package io.github.vojtechpavlu.fileChecker.utils;
 
 
-import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.stream.Stream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 
 
 /**
@@ -18,98 +17,36 @@ import java.util.stream.Stream;
  * PROJECT WAS CREATED JUST FOR FUN.</i>
  *
  *
- * <p>Class of {@link FileReader} is an abstract representation
- * and implementation of the instances belonging to this class.</p>
+ * <p>Interface of {@link FileReader} defines a basic set of signatures
+ * of methods overridden by it's descendants.</p>
  *
  * <p></p>
  *
  * @author Vojtech Pavlu
  * @version 2021-02-25
+ *
  */
-public class FileReader {
-
-    /* =========================================================== */
-    /* ====== INSTANCE VARIABLES ================================= */
+public interface FileReader {
 
 
+    /**
+     * <p>This method returns an encoding used to read the files.</p>
+     *
+     * @return  {@link FileEncoding} used for reading the given files.
+     */
+    public FileEncoding getEncoding();
 
 
-    /* =========================================================== */
-    /* ====== STATIC VARIABLES =================================== */
-
-
-
-
-    /* =========================================================== */
-    /* ====== INSTANCE INIT BLOCKS =============================== */
-
-
-
-
-    /* =========================================================== */
-    /* ====== STATIC INIT BLOCKS ================================= */
-
-
-
-
-
-    /* =========================================================== */
-    /* ====== CONSTRUCTORS ======================================= */
-
-
-    FileReader(File file, String encoding) throws FileNotFoundException, UnsupportedEncodingException {
-
-        new BufferedReader(new InputStreamReader(new FileInputStream(file), encoding));
-    }
-
-
-    /* =========================================================== */
-    /* ====== OVERRIDDEN METHODS ================================= */
-
-
-
-
-    /* =========================================================== */
-    /* ====== INSTANCE METHODS =================================== */
-
-
-
-
-
-
-    /* =========================================================== */
-    /* ====== STATIC METHODS ===================================== */
-
-
-    public static String read(File file) throws IOException {
-
-        StringBuilder contentBuilder = new StringBuilder();
-
-        Stream<String> stream = Files.lines(Paths.get(file.toString()),  StandardCharsets.UTF_16);
-        stream.forEach(s -> contentBuilder.append(s).append("\n"));
-
-        return contentBuilder.toString();
-    }
-
-
-    /* =========================================================== */
-    /* ====== GETTERS AND SETTERS ================================ */
-
-
-
-
-    /* =========================================================== */
-    /* ====== MAIN METHOD ======================================== */
-
-
-    public static void main(String[] args) throws IOException {
-        
-        System.out.println(">>> QUICK TEST OF FileReader BEGINS!");
-
-        System.out.println(read(new File("C:\\Users\\Vojta\\Downloads\\Zkouška - průběh + otázky.txt")));
-        
-        System.out.println(">>> QUICK TEST OF FileReader ENDED SUCCESSFULLY!");
-    }
-
-
+    /**
+     * <p>This method reads a file and returns a String representation of the content.</p>
+     *
+     * @param file  {@link File} to be read
+     *
+     * @return      {@link String}-formed content
+     *
+     * @throws FileNotFoundException            When an error while reading file occurs
+     * @throws UnsupportedEncodingException     When the given encoding is not supported
+     * @throws IOException                  When an error while reading file occurs
+     */
+    public String read(File file) throws FileNotFoundException, UnsupportedEncodingException, IOException;
 }
