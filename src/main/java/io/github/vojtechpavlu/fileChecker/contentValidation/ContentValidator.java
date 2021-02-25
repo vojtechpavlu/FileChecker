@@ -4,6 +4,7 @@ package io.github.vojtechpavlu.fileChecker.contentValidation;
 import io.github.vojtechpavlu.fileChecker.core.FileCheck;
 
 import java.io.File;
+import java.io.IOException;
 
 
 /**
@@ -39,4 +40,21 @@ public interface ContentValidator extends FileCheck {
      *          of file's content check.
      */
     public Schema getSchema();
+
+
+
+    /**
+     * <p>This method is responsible for checking, if the given {@link File}
+     * corresponds the rules defined by this class.</p>
+     *
+     * @param file              Path to the {@link File} to be checked.
+     *
+     * @return                  {@code true} when the given file passes all
+     *                          the subtests defined by this class. Otherwise
+     *                          it returns {@code false}
+     *
+     * @throws IOException      When some error occurs. Usually it's because the
+     *                          file does not exist or is not reachable.
+     */
+    public boolean check(File file) throws IOException, SchemaNotDefinedException;
 }
