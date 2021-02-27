@@ -7,7 +7,6 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.attribute.BasicFileAttributes;
-import java.nio.file.attribute.PosixFileAttributes;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
@@ -42,6 +41,7 @@ public abstract class TimeExaminer implements FileCheck {
     /* =========================================================== */
     /* ====== INSTANCE VARIABLES ================================= */
 
+    /** The marginal date and time which should  be tested against */
     private final LocalDateTime time;
 
 
@@ -109,7 +109,7 @@ public abstract class TimeExaminer implements FileCheck {
      * @throws IOException      When the given file does not exist or any
      *                          other fatal problem occurs
      */
-    public LocalDateTime getDateOfCreation(File file) throws IOException {
+    protected LocalDateTime getDateOfCreation(File file) throws IOException {
 
         return new Timestamp(Files.readAttributes(
                 file.toPath(),
@@ -129,7 +129,7 @@ public abstract class TimeExaminer implements FileCheck {
      * @throws IOException      When the given file does not exist or any
      *                          other fatal problem occurs
      */
-    public LocalDateTime getDateOfLastModification(File file) throws IOException {
+    protected LocalDateTime getDateOfLastModification(File file) throws IOException {
 
         return new Timestamp(Files.readAttributes(
                 file.toPath(),
@@ -149,7 +149,7 @@ public abstract class TimeExaminer implements FileCheck {
      * @throws IOException      When the given file does not exist or any
      *                          other fatal problem occurs
      */
-    public LocalDateTime getDateOfLastAccess(File file) throws IOException {
+    protected LocalDateTime getDateOfLastAccess(File file) throws IOException {
 
         return new Timestamp(Files.readAttributes(
                 file.toPath(),
@@ -165,26 +165,4 @@ public abstract class TimeExaminer implements FileCheck {
 
         return this.time;
     }
-
-
-    /* =========================================================== */
-    /* ====== MAIN METHOD ======================================== */
-
-
-    public static void main(String[] args) throws IOException {
-        
-        System.out.println(">>> QUICK TEST OF LastModifiedCheck BEGINS!");
-
-        File f = new File("D:\\Seriály\\Dr. House\\Dr. House - 5. serie\\Dr.House 5x09 - Posledni moznost.avi");
-
-        BasicFileAttributes attributes = Files.readAttributes(f.toPath(), BasicFileAttributes.class);
-        PosixFileAttributes attr = Files.readAttributes(f.toPath(), PosixFileAttributes.class);
-        //attr.
-        //attributes.
-
-        
-        System.out.println(">>> QUICK TEST OF LastModifiedCheck ENDED SUCCESSFULLY!");
-    }
-
-
 }
