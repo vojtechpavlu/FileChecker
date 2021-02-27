@@ -42,11 +42,12 @@ public interface FileReader {
      *
      * @param file  {@link File} to be read
      *
-     * @return      {@link String}-formed content
+     * @return      {@link Object}-made result of the reading. Usually String or a set of
+     *              Strings
      *
      * @throws FileNotFoundException            When an error while reading file occurs
      * @throws UnsupportedEncodingException     When the given encoding is not supported
-     * @throws IOException                  When an error while reading file occurs
+     * @throws IOException                      When an error while reading file occurs
      */
-    public String read(File file) throws FileNotFoundException, UnsupportedEncodingException, IOException;
+    public Object read(File file) throws FileNotFoundException, UnsupportedEncodingException, IOException;
 }
