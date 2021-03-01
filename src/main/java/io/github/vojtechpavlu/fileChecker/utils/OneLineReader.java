@@ -19,10 +19,16 @@ import java.util.List;
  * <p>Class of {@link OneLineReader} is an abstract representation
  * and implementation of the instances belonging to this class.</p>
  *
- * <p></p>
+ * <p>These instances provide reading of a file in a specific encoding.
+ * The result of the reading is one long {@link String}. This is an
+ * alternative to {@link LineListingReader} and {@link NewLineSeparatingReader}.</p>
  *
  * @author Vojtech Pavlu
  * @version 2021-02-25
+ *
+ * @see LineListingReader
+ * @see NewLineSeparatingReader
+ * @see FileReader
  */
 public class OneLineReader implements FileReader {
 

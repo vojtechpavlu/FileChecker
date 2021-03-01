@@ -14,12 +14,14 @@ package io.github.vojtechpavlu.fileChecker.utils;
  * <p>Enumeration of {@link FileEncoding} is an abstract container of these
  * related types.</p>
  *
- * <p>Compilation of supported file encodings the Java can work with.</p>
+ * <p>Compilation of supported file encodings the Java can work with.
+ * Client can just pick an encoding by it's name and use it for reading
+ * files.</p>
  *
  * @author Vojtech Pavlu
  * @version 2021-02-25
  *
- * @see <a href="https://docs.oracle.com/javase/8/docs/technotes/guides/intl/encoding.doc.html"></a>
+ * @see <a href="https://docs.oracle.com/javase/8/docs/technotes/guides/intl/encoding.doc.html">Encodings</a>
  */
 public enum FileEncoding {
 
@@ -223,9 +225,19 @@ public enum FileEncoding {
 
 
     /**
-     * <p></p>
-     * @param encoding
-     * @return
+     * <p>Searches the {@link FileEncoding} instance represented by the
+     * String form used inside Java environment.</p>
+     *
+     * @param encoding      String-formed code representing an encoding
+     *                      in the Java environment
+     *
+     * @return              When there really is such an encoding, it returns
+     *                      it. It goes through all the defined in this enum
+     *                      class. When it does not find such an instance, it
+     *                      returns {@code null}.
+     *
+     *
+     * @see <a href="https://docs.oracle.com/javase/8/docs/technotes/guides/intl/encoding.doc.html">Encodings</a>
      */
     public static FileEncoding search(String encoding) {
 

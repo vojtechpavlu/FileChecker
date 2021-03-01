@@ -20,11 +20,15 @@ import java.io.UnsupportedEncodingException;
  * <p>Interface of {@link FileReader} defines a basic set of signatures
  * of methods overridden by it's descendants.</p>
  *
- * <p></p>
+ * <p>Instances implementing this interface are servants providing
+ * reading text files. These readers has to have an encoding in which they
+ * read the given files. Return values' types may differ.</p>
+ *
+ * <p>The core of this instance is the {@link FileReader#read(File)}, which
+ * does all the work.</p>
  *
  * @author Vojtech Pavlu
  * @version 2021-02-25
- *
  */
 public interface FileReader {
 

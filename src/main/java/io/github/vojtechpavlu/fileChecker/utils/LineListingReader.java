@@ -19,10 +19,16 @@ import java.util.List;
  * <p>Class of {@link LineListingReader} is an abstract representation
  * and implementation of the instances belonging to this class.</p>
  *
- * <p></p>
+ * <p>This instance provides reading a file as a {@link List} of Strings,
+ * where each of the items in the list is a line of the file. Alternative
+ * is a {@link NewLineSeparatingReader}, which returns just one String,
+ * while the lines are separated by the {@code \n} sequence.</p>
  *
  * @author Vojtech Pavlu
  * @version 2021-02-25
+ *
+ * @see FileReader
+ * @see NewLineSeparatingReader
  */
 public class LineListingReader implements FileReader {
 
@@ -82,7 +88,7 @@ public class LineListingReader implements FileReader {
 
 
     /* =========================================================== */
-    /* ====== INSTANCE METHODS =================================== */
+    /* ====== OVERRIDDEN METHODS ================================= */
 
 
 

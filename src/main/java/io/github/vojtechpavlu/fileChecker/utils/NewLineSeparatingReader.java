@@ -19,10 +19,20 @@ import java.util.List;
  * <p>Class of {@link NewLineSeparatingReader} is an abstract representation
  * and implementation of the instances belonging to this class.</p>
  *
- * <p></p>
+ * <p>This class provides reading a file using a specified encoding. The result
+ * of the reading is a long {@link String}, where new lines in the file are
+ * represented by the {@code \n} sequence. Alternatively, there are classes of
+ * {@link LineListingReader} (each line is an item in the result {@link List})
+ * and {@link OneLineReader}, where the file is represented as a one long String
+ * without any whitespace representing a line separation.</p>
  *
  * @author Vojtech Pavlu
  * @version 2021-02-25
+ *
+ * @see io.github.vojtechpavlu.fileChecker.utils.FileReader
+ * @see LineListingReader
+ * @see OneLineReader
+ * @see FileEncoding
  */
 public class NewLineSeparatingReader implements FileReader {
 
@@ -40,12 +50,6 @@ public class NewLineSeparatingReader implements FileReader {
      * <p>{@code Multiton} design pattern collection holding already created instances.</p>
      */
     private static List<NewLineSeparatingReader> READERS = new ArrayList<>();
-
-
-    /* =========================================================== */
-    /* ====== INSTANCE INIT BLOCKS =============================== */
-
-
 
 
     /* =========================================================== */
@@ -86,12 +90,6 @@ public class NewLineSeparatingReader implements FileReader {
 
     /* =========================================================== */
     /* ====== OVERRIDDEN METHODS ================================= */
-
-
-
-
-    /* =========================================================== */
-    /* ====== INSTANCE METHODS =================================== */
 
 
 
