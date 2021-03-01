@@ -16,32 +16,27 @@ import java.time.LocalDateTime;
  * PROJECT WAS CREATED JUST FOR FUN.</i>
  *
  *
- * <p>Class of {@link CreatedBeforeCheck} is an abstract representation
+ * <p>Class of {@link LastModifiedAfterCheck} is an abstract representation
  * and implementation of the instances belonging to this class.</p>
  *
- * <p>This class let's you test if the given file was created before
- * the given date or the same. For both of these conditions it returns
- * {@code true}.</p>
- *
- * <p>The marginal date time is an instance of {@link LocalDateTime} and
- * is stored in the abstract ancestor of this class the {@link TimeExaminer}.</p>
+ * <p>These instances are responsible for checking the file last modification.
+ * It's focus is on the time after the modification. It means it checks,
+ * if the file's last modification was after the given date.</p>
  *
  * @author Vojtech Pavlu
  * @version 2021-02-27
- *
- * @see TimeExaminer
  */
-public class CreatedBeforeCheck extends TimeExaminer {
-
+public class LastModifiedAfterCheck extends TimeExaminer {
 
     /* =========================================================== */
     /* ====== CONSTRUCTORS ======================================= */
 
+
     /**
      * <p>This creates an instance by definition of he marginal time
-     * as very now - the time of the creation of the instance.</p>
+     * as very now - the time of the last modification of the instance.</p>
      */
-    public CreatedBeforeCheck() {
+    public LastModifiedAfterCheck() {
 
         super(LocalDateTime.now());
     }
@@ -53,7 +48,7 @@ public class CreatedBeforeCheck extends TimeExaminer {
      *
      * @param time      to be set as the pivot, the marginal {@link LocalDateTime}
      */
-    public CreatedBeforeCheck(LocalDateTime time) {
+    public LastModifiedAfterCheck(LocalDateTime time) {
 
         super(time);
     }
@@ -78,8 +73,8 @@ public class CreatedBeforeCheck extends TimeExaminer {
     @Override
     public boolean check(File file) throws IOException {
 
-        LocalDateTime created = super.getDateOfCreation(file);
+        LocalDateTime modified = super.getDateOfLastModification(file);
 
-        return created.isBefore(super.getTime()) || created.isEqual(super.getTime());
+        return modified.isAfter(super.getTime()) || modified.isEqual(super.getTime());
     }
 }

@@ -16,32 +16,26 @@ import java.time.LocalDateTime;
  * PROJECT WAS CREATED JUST FOR FUN.</i>
  *
  *
- * <p>Class of {@link CreatedBeforeCheck} is an abstract representation
+ * <p>Class of {@link AccessedAfterCheck} is an abstract representation
  * and implementation of the instances belonging to this class.</p>
  *
- * <p>This class let's you test if the given file was created before
- * the given date or the same. For both of these conditions it returns
- * {@code true}.</p>
- *
- * <p>The marginal date time is an instance of {@link LocalDateTime} and
- * is stored in the abstract ancestor of this class the {@link TimeExaminer}.</p>
+ * <p>These instances returns if the given file was accessed after the
+ * given marginal time.</p>
  *
  * @author Vojtech Pavlu
  * @version 2021-02-27
- *
- * @see TimeExaminer
  */
-public class CreatedBeforeCheck extends TimeExaminer {
-
+public class AccessedAfterCheck extends TimeExaminer {
 
     /* =========================================================== */
     /* ====== CONSTRUCTORS ======================================= */
 
+
     /**
      * <p>This creates an instance by definition of he marginal time
-     * as very now - the time of the creation of the instance.</p>
+     * as very now - the time of the last access of the instance.</p>
      */
-    public CreatedBeforeCheck() {
+    public AccessedAfterCheck() {
 
         super(LocalDateTime.now());
     }
@@ -53,7 +47,7 @@ public class CreatedBeforeCheck extends TimeExaminer {
      *
      * @param time      to be set as the pivot, the marginal {@link LocalDateTime}
      */
-    public CreatedBeforeCheck(LocalDateTime time) {
+    public AccessedAfterCheck(LocalDateTime time) {
 
         super(time);
     }
@@ -78,8 +72,8 @@ public class CreatedBeforeCheck extends TimeExaminer {
     @Override
     public boolean check(File file) throws IOException {
 
-        LocalDateTime created = super.getDateOfCreation(file);
+        LocalDateTime access = super.getDateOfLastAccess(file);
 
-        return created.isBefore(super.getTime()) || created.isEqual(super.getTime());
+        return access.isAfter(super.getTime()) || access.isEqual(super.getTime());
     }
 }

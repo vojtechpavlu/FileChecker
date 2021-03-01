@@ -69,6 +69,6 @@ public class CreatedAfterCheck extends TimeExaminer {
 
         LocalDateTime created = super.getDateOfCreation(file);
 
-        return !created.isAfter(super.getTime()) || created.isEqual(super.getTime());
+        return created.isAfter(super.getTime()) || created.isEqual(super.getTime());
     }
 }
